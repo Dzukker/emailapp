@@ -10,19 +10,23 @@ public class Main {
         String firstname = scanner.next();
         String lastname = scanner.next();
 
+
+        String department = new String();
         System.out.println("Input the department name");
-        String department = scanner.next();
+        department = scanner.next();
 
         System.out.print(getEmail(firstname, lastname, department));
     }
 
     public static String getEmail(String firstname, String lastname, String department) {
 
-        if (!department.equals(null)) {
-            String email = firstname + "." + lastname + "@" + department + ".company.com";
+        String email;
+
+        if (!department.equals("")) {
+            email = firstname + "." + lastname + "@" + department + ".company.com";
             return email;
         }
-        String email = firstname + "." + lastname + "@company.com";
+        email = firstname + "." + lastname + "@company.com";
         return email;
     }
 }
