@@ -4,10 +4,10 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        List<User> userList = new ArrayList<>();
-        userManager users = new userManager(userList);
+        List<user> userList = new ArrayList<>();
+        userRepository users = new userRepository(userList);
 
-        while(true) users = userInterface.UI(users);
+        while(true) users = menuClass.userInterface(users);
     }
 
 }

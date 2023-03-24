@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class userInterface {
-    public static userManager UI(userManager users){
+public class menuClass {
+    public static userRepository userInterface(userRepository users){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter command.");
         String option = scanner.nextLine().toLowerCase();
@@ -31,10 +31,10 @@ public class userInterface {
             }
             case "select user" -> userManagement.userSelect(users);
             case "new user" -> {
-                User user = new User("null@null.null", null, null, 0);
-                user = userManagement.newEmail(user);
-                user = userManagement.newPassword(user);
-                users.setSelectedUser(user);
+                user newUser = new user("null@null.null", null, null, 0);
+                newUser = userManagement.newEmail(newUser);
+                newUser = userManagement.newPassword(newUser);
+                users.setSelectedUser(newUser);
                 System.out.println("Completed.");
                 users.getUserList().add(users.getSelectedUser());
             }
