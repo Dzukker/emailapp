@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class menu {
-    public static userRepository userInterface(userRepository users){
+public class Menu {
+    public static UserRepository userInterface(UserRepository users){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter command.");
         String option = scanner.nextLine().toLowerCase();
@@ -29,11 +29,11 @@ public class menu {
                     System.out.println("No command list found.");
                 }
             }
-            case "select user" -> userManagement.userSelect(users);
+            case "select user" -> UserManagement.userSelect(users);
             case "new user" -> {
-                user newUser = new user("null@null.null", null, null, 0);
-                newUser = userManagement.newEmail(newUser);
-                newUser = userManagement.newPassword(newUser);
+                User newUser = new User("null@null.null", null, null, 0);
+                newUser = UserManagement.newEmail(newUser);
+                newUser = UserManagement.newPassword(newUser);
                 users.setSelectedUser(newUser);
                 System.out.println("Completed.");
                 users.getUserList().add(users.getSelectedUser());
@@ -77,7 +77,7 @@ public class menu {
             case "set password" -> {
                 if (users.getSelectedUser() != null) {
                     int index = users.getUserList().indexOf(users.getSelectedUser());
-                    users.setSelectedUser(userManagement.changePassword(users.getSelectedUser()));
+                    users.setSelectedUser(UserManagement.changePassword(users.getSelectedUser()));
                     users.getUserList().set(index, users.getSelectedUser());
                     break;
                 }
@@ -86,7 +86,7 @@ public class menu {
             case "set mailbox capacity" -> {
                 if (users.getSelectedUser() != null) {
                     int index = users.getUserList().indexOf(users.getSelectedUser());
-                    users.setSelectedUser(userManagement.mailboxCapacity(users.getSelectedUser()));
+                    users.setSelectedUser(UserManagement.mailboxCapacity(users.getSelectedUser()));
                     users.getUserList().set(index, users.getSelectedUser());
                     break;
                 }
@@ -95,7 +95,7 @@ public class menu {
             case "set alternate email" -> {
                 if (users.getSelectedUser() != null) {
                     int index = users.getUserList().indexOf(users.getSelectedUser());
-                    users.setSelectedUser(userManagement.setAlterEmail(users.getSelectedUser()));
+                    users.setSelectedUser(UserManagement.setAlterEmail(users.getSelectedUser()));
                     users.getUserList().set(index, users.getSelectedUser());
                     break;
                 }

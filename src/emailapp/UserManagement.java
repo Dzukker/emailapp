@@ -6,9 +6,9 @@ package emailapp;
         import java.util.Scanner;
         import java.util.regex.Pattern;
 
-public class userManagement {
+public class UserManagement {
 
-    public static user newEmail(user currentUser) {
+    public static User newEmail(User currentUser) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Input first name and last name:");
@@ -31,11 +31,11 @@ public class userManagement {
         }else {
             email = firstname + "." + lastname + "@company.com";
         }
-        return new user(email, currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
+        return new User(email, currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
 
     }
 
-    public static user newPassword(user currentUser) {
+    public static User newPassword(User currentUser) {
         String alphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuv";
 
         StringBuilder password = new StringBuilder(10);
@@ -47,38 +47,38 @@ public class userManagement {
             password.append(randomChar);
         }
 
-        return new user(currentUser.email(), password.toString(), currentUser.altEmail(), currentUser.mailboxCapacity());
+        return new User(currentUser.email(), password.toString(), currentUser.altEmail(), currentUser.mailboxCapacity());
     }
 
-    public static user changePassword(user currentUser) {
+    public static User changePassword(User currentUser) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Type new password");
         String newPassword = scanner.next();
         System.out.println("Completed.");
-        return new user(currentUser.email(), newPassword, currentUser.altEmail(), currentUser.mailboxCapacity());
+        return new User(currentUser.email(), newPassword, currentUser.altEmail(), currentUser.mailboxCapacity());
     }
 
-    public static user mailboxCapacity(user currentUser){
+    public static User mailboxCapacity(User currentUser){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input the capacity of the mailbox.");
         try{
             int newMailboxCapacity = scanner.nextInt();
             System.out.println("Completed.");
-            return new user(currentUser.email(), currentUser.password(), currentUser.altEmail(), newMailboxCapacity);
+            return new User(currentUser.email(), currentUser.password(), currentUser.altEmail(), newMailboxCapacity);
         } catch (InputMismatchException e) {
             System.out.println("Invalid input.");
             return currentUser;
         }
     }
 
-    public static user setAlterEmail(user currentUser){
+    public static User setAlterEmail(User currentUser){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter alternate email.");
         String emailAlt = scanner.next();
 
         if (isEmailValid(emailAlt)){
             System.out.println("Completed.");
-            return new user(currentUser.email(), currentUser.password(), emailAlt, currentUser.mailboxCapacity());
+            return new User(currentUser.email(), currentUser.password(), emailAlt, currentUser.mailboxCapacity());
         }
         System.out.println("Incorrect email.");
         return currentUser;
@@ -92,7 +92,7 @@ public class userManagement {
         return pat.matcher(email).matches();
     }
 
-    public static void userSelect(userRepository users) {
+    public static void userSelect(UserRepository users) {
         Scanner scanner = new Scanner(System.in);
         if (users.getUserList().isEmpty()) {
             System.out.println("No users found.");
@@ -104,7 +104,7 @@ public class userManagement {
             }
             try{
                 int selecteduserIndex = scanner.nextInt();
-                user selecteduser = users.getUserList().get(selecteduserIndex - 1);
+                User selecteduser = users.getUserList().get(selecteduserIndex - 1);
                 System.out.println("Selected user: " + selecteduser.email());
                 users.setSelectedUser(selecteduser);
             }catch(InputMismatchException e){
