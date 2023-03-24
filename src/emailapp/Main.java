@@ -7,7 +7,7 @@ public class Main {
         List<user> userList = new ArrayList<>();
         userRepository users = new userRepository(userList);
 
-        while(true) users = menuClass.userInterface(users);
+        while(true) users = menu.userInterface(users);
     }
 
 }

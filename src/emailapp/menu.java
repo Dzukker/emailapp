@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class menuClass {
+public class menu {
     public static userRepository userInterface(userRepository users){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter command.");
