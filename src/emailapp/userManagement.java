@@ -1,8 +1,6 @@
 
 package emailapp;
 
-        import java.io.File;
-        import java.io.FileNotFoundException;
         import java.util.InputMismatchException;
         import java.util.Random;
         import java.util.Scanner;

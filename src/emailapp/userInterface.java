@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import static emailapp.userManagement.newPassword;
-
 public class userInterface {
     public static userManager UI(userManager users){
         Scanner scanner = new Scanner(System.in);
