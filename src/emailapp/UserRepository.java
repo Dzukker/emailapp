@@ -1,8 +1,9 @@
 package emailapp;
+
 import java.util.List;
 
 public class UserRepository {
-    private List<User> userList;
+    private final List<User> userList;
     private User selectedUser;
 
     public UserRepository(List<User> userList){

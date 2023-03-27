@@ -1,10 +1,8 @@
-
 package emailapp;
 
-        import java.util.InputMismatchException;
-        import java.util.Random;
-        import java.util.Scanner;
-        import java.util.regex.Pattern;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class UserManagement {
 
@@ -32,30 +30,6 @@ public class UserManagement {
             email = firstname + "." + lastname + "@company.com";
         }
         return new User(email, currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
-
-    }
-
-    public static User newPassword(User currentUser) {
-        String alphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuv";
-
-        StringBuilder password = new StringBuilder(10);
-        Random random = new Random();
-
-        for (int i = 0; i < 10; i++) {
-            int randomIndex = random.nextInt(alphanumericCharacters.length());
-            char randomChar = alphanumericCharacters.charAt(randomIndex);
-            password.append(randomChar);
-        }
-
-        return new User(currentUser.email(), password.toString(), currentUser.altEmail(), currentUser.mailboxCapacity());
-    }
-
-    public static User changePassword(User currentUser) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Type new password");
-        String newPassword = scanner.next();
-        System.out.println("Completed.");
-        return new User(currentUser.email(), newPassword, currentUser.altEmail(), currentUser.mailboxCapacity());
     }
 
     public static User mailboxCapacity(User currentUser){
@@ -76,7 +50,7 @@ public class UserManagement {
         System.out.println("Enter alternate email.");
         String emailAlt = scanner.next();
 
-        if (isEmailValid(emailAlt)){
+        if (emailValidation(emailAlt)){
             System.out.println("Completed.");
             return new User(currentUser.email(), currentUser.password(), emailAlt, currentUser.mailboxCapacity());
         }
@@ -84,7 +58,7 @@ public class UserManagement {
         return currentUser;
     }
 
-    public static boolean isEmailValid(String email){
+    public static boolean emailValidation(String email){
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$";
         Pattern pat = Pattern.compile(emailRegex);
         if (email == null)

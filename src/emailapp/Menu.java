@@ -33,7 +33,7 @@ public class Menu {
             case "new user" -> {
                 User newUser = new User("null@null.null", null, null, 0);
                 newUser = UserManagement.newEmail(newUser);
-                newUser = UserManagement.newPassword(newUser);
+                newUser = PasswordManagement.newPassword(newUser);
                 users.setSelectedUser(newUser);
                 System.out.println("Completed.");
                 users.getUserList().add(users.getSelectedUser());
@@ -77,7 +77,7 @@ public class Menu {
             case "set password" -> {
                 if (users.getSelectedUser() != null) {
                     int index = users.getUserList().indexOf(users.getSelectedUser());
-                    users.setSelectedUser(UserManagement.changePassword(users.getSelectedUser()));
+                    users.setSelectedUser(PasswordManagement.changePassword(users.getSelectedUser()));
                     users.getUserList().set(index, users.getSelectedUser());
                     break;
                 }
