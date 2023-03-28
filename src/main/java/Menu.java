@@ -1,4 +1,4 @@
-package emailapp;
+package main.java;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +16,7 @@ public class Menu {
                 System.exit(0);
             }
             case "commands" -> {
-                File file = new File("src/emailapp/commands.txt");
+                File file = new File("commands.txt");
                 try {
                     Scanner readfile = new Scanner(file);
 

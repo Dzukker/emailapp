@@ -1,11 +1,13 @@
-package emailapp;
+package test.java;
 
+import main.java.PasswordManagement;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class PasswordValidationTest {
     @Test
     void testValidPassword() {
-        assertTrue(PasswordManagement.passwordValidation("Passw0rdte"));
+        Assertions.assertTrue(PasswordManagement.passwordValidation("Passw0rdte"));
     }
 
     @Test
