@@ -4,25 +4,25 @@ import java.util.regex.Pattern;
 
 public class UserManagement {
 
-    public static User newEmail(User currentUser, String[] userData) { // TODO no static in all places!!!
+    public User newEmail(User currentUser, String[] userData) {
         String email;
 
 //        userData[0] = firstname, userData[0] = lastname, userData[2] = department
         if (userData[2].equals("sales") || userData[2].equals("development") || userData[2].equals("accounting")) {
-            email = userData[0] + "." + userData[1] + "@" + userData[2] + ".company.com"; // TODO use string builder
+             email = String.format("%s.%s@%s.company.com", userData[0], userData[1], userData[2]);
         } else {
-            email = userData[0] + "." + userData[1] + "@company.com"; // TODO use string builder
+             email = String.format("%s.%s@company.com", userData[0], userData[1]);
         }
         return new User(email, currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
 
     }
 
-    public static User mailboxCapacity(User currentUser, int newMailboxCapacity){
+    public User mailboxCapacity(User currentUser, int newMailboxCapacity){
         System.out.println("Completed.");
         return new User(currentUser.email(), currentUser.password(), currentUser.altEmail(), newMailboxCapacity);
     }
 
-    public static User setAlterEmail(User currentUser, String emailAlt){
+    public User setAlterEmail(User currentUser, String emailAlt){
 
             if (emailValidation(emailAlt)) {
                 System.out.println("Completed.");
@@ -32,8 +32,8 @@ public class UserManagement {
             return currentUser;
     }
 
-    public static boolean emailValidation(String email){ // TODO privte and non static
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$"; // TODO extract to constant filed, private
+    private boolean emailValidation(String email){
+        final String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$";
         Pattern pat = Pattern.compile(emailRegex);
         if (email == null)
             return false;

@@ -1,38 +1,50 @@
 package test.java;
 
 import main.java.PasswordManagement;
-import org.junit.jupiter.api.Assertions;
+import main.java.User;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class PasswordValidationTest {
+    PasswordManagement pm = new PasswordManagement();
+    User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
     @DisplayName("Inserted valid password")
     @Test
-    void testValidPassword() {
-        Assertions.assertTrue(PasswordManagement.passwordValidation("Passw0rdte"));
+    public void testInvalidPassword() {
+        User updatedUser = pm.changePassword(currentUser, "wrongpassword");
+
+        assertEquals("oldpassword", updatedUser.password());
     }
 
     @DisplayName("Inserted too short password")
     @Test
-    void testInvalidPasswordTooShort() {
-        assertFalse(PasswordManagement.passwordValidation("Passw0r"));
+    public void testShortPassword() {
+        User updatedUser = pm.changePassword(currentUser, "short");
+
+        assertEquals("oldpassword", updatedUser.password());
     }
 
     @DisplayName("Inserted password with no uppercases")
     @Test
-    void testInvalidPasswordNoUppercase() {
-        assertFalse(PasswordManagement.passwordValidation("passw0rdtest"));
+    public void testNoUppercasePassword() {
+        User updatedUser = pm.changePassword(currentUser, "noupperca1");
+
+        assertEquals("oldpassword", updatedUser.password());
     }
 
     @DisplayName("Inserted password with no lowercases")
     @Test
-    void testInvalidPasswordNoLowercase() {
-        assertFalse(PasswordManagement.passwordValidation("PASSW0RDTEST"));
+    public void testNoLowercasePassword() {
+        User updatedUser = pm.changePassword(currentUser, "NOLOWERCA1");
+
+        assertEquals("oldpassword", updatedUser.password());
     }
 
     @DisplayName("Inserted password with no digits")
     @Test
-    void testInvalidPasswordNoDigit() {
-        assertFalse(PasswordManagement.passwordValidation("PasswordTest"));
+    public void testNoDigitPassword() {
+        User updatedUser = pm.changePassword(currentUser, "NoDigitpas");
+
+        assertEquals("oldpassword", updatedUser.password());
     }
 }
