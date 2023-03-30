@@ -16,7 +16,7 @@ PasswordManagement pm = new PasswordManagement();
     public void testValidChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        User updatedUser = pm.changePassword(currentUser, "newPasswo1");
+        User updatedUser = pm.setPassword(currentUser, "newPasswo1");
 
         assertEquals("newPasswo1", updatedUser.password());
     }
@@ -26,7 +26,7 @@ PasswordManagement pm = new PasswordManagement();
     public void testInvalidChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        User updatedUser = pm.changePassword(currentUser, "wrongpassword");
+        User updatedUser = pm.setPassword(currentUser, "wrongpassword");
 
         assertEquals("oldpassword", updatedUser.password());
     }
@@ -36,7 +36,7 @@ PasswordManagement pm = new PasswordManagement();
     public void testNullChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        User updatedUser = pm.changePassword(currentUser, null);
+        User updatedUser = pm.setPassword(currentUser, null);
 
         assertEquals("oldpassword", updatedUser.password());
     }

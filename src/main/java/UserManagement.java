@@ -3,6 +3,17 @@ package main.java;
 import java.util.regex.Pattern;
 
 public class UserManagement {
+    PasswordManagement pm = new PasswordManagement();
+    Input input = new Input();
+
+    public void newUser(UserRepository users){
+        User newUser = new User("null@null.null", null, null, 0);
+        newUser = newEmail(newUser, input.inputUserData());
+        newUser = pm.newPassword(newUser);
+        users.setSelectedUser(newUser);
+        System.out.println("Completed.");
+        users.getUserList().add(users.getSelectedUser());
+    }
 
     public User newEmail(User currentUser, String[] userData) {
         String email;
@@ -17,12 +28,12 @@ public class UserManagement {
 
     }
 
-    public User mailboxCapacity(User currentUser, int newMailboxCapacity){
+    public User setMailboxCapacity(User currentUser, int newMailboxCapacity){
         System.out.println("Completed.");
         return new User(currentUser.email(), currentUser.password(), currentUser.altEmail(), newMailboxCapacity);
     }
 
-    public User setAlterEmail(User currentUser, String emailAlt){
+    public User setAltEmail(User currentUser, String emailAlt){
 
             if (emailValidation(emailAlt)) {
                 System.out.println("Completed.");
@@ -38,5 +49,41 @@ public class UserManagement {
         if (email == null)
             return false;
         return pat.matcher(email).matches();
+    }
+
+    public String getEmail(UserRepository users){
+        if (users.getSelectedUser() != null) {
+            return users.getSelectedUser().email();
+
+        }
+        return "User not created.";
+    }
+
+    public String getPassword(UserRepository users){
+        if (users.getSelectedUser() != null) {
+            System.out.println(users.getSelectedUser().password());
+            return users.getSelectedUser().password();
+        }
+        return "User not created.";
+    }
+
+    public String getMailboxCapacity(UserRepository users){
+        if (users.getSelectedUser() != null) {
+            if (users.getSelectedUser().mailboxCapacity() != 0) {
+                return String.valueOf(users.getSelectedUser().mailboxCapacity());
+            }
+            return "Users mailbox capacity not created.";
+        }
+        return "User not created.";
+    }
+
+    public String getAltEmail(UserRepository users){
+        if (users.getSelectedUser() != null) {
+            if (users.getSelectedUser().altEmail() != null) {
+                return users.getSelectedUser().altEmail();
+            }
+            return "Users alternate email not created.";
+        }
+        return "User not created.";
     }
 }
