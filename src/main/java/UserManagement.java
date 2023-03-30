@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -42,20 +43,28 @@ public class UserManagement {
         } catch (InputMismatchException e) {
             System.out.println("Invalid input.");
             return currentUser;
+        } catch(NoSuchElementException e){
+            System.out.println("Invalid input.");
+            return currentUser;
         }
     }
 
     public static User setAlterEmail(User currentUser){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter alternate email.");
-        String emailAlt = scanner.next();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter alternate email.");
+            String emailAlt = scanner.next();
 
-        if (emailValidation(emailAlt)){
-            System.out.println("Completed.");
-            return new User(currentUser.email(), currentUser.password(), emailAlt, currentUser.mailboxCapacity());
+            if (emailValidation(emailAlt)) {
+                System.out.println("Completed.");
+                return new User(currentUser.email(), currentUser.password(), emailAlt, currentUser.mailboxCapacity());
+            }
+            System.out.println("Incorrect email.");
+            return currentUser;
+        }catch(NoSuchElementException e){
+            System.out.println("Incorrect email.");
+            return currentUser;
         }
-        System.out.println("Incorrect email.");
-        return currentUser;
     }
 
     public static boolean emailValidation(String email){
@@ -85,6 +94,8 @@ public class UserManagement {
                 System.out.println("Error, You should enter numbers");
             }catch(IndexOutOfBoundsException e){
                 System.out.println("Error, You should enter number in bounds of user list");
+            }catch(NoSuchElementException e){
+                System.out.println("Error, You should enter numbers");
             }
         }
     }
