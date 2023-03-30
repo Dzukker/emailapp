@@ -10,13 +10,13 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 public class ChangePasswordTest {
-
+PasswordManagement pm = new PasswordManagement();
     @DisplayName("Valid password inserted")
     @Test
     public void testValidChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        User updatedUser = PasswordManagement.changePassword(currentUser, "newPasswo1");
+        User updatedUser = pm.changePassword(currentUser, "newPasswo1");
 
         assertEquals("newPasswo1", updatedUser.password());
     }
@@ -26,7 +26,7 @@ public class ChangePasswordTest {
     public void testInvalidChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        User updatedUser = PasswordManagement.changePassword(currentUser, "wrongpassword");
+        User updatedUser = pm.changePassword(currentUser, "wrongpassword");
 
         assertEquals("oldpassword", updatedUser.password());
     }
@@ -36,7 +36,7 @@ public class ChangePasswordTest {
     public void testNullChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        User updatedUser = PasswordManagement.changePassword(currentUser, null);
+        User updatedUser = pm.changePassword(currentUser, null);
 
         assertEquals("oldpassword", updatedUser.password());
     }

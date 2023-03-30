@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PasswordManagement {
-    public static User newPassword(User currentUser) {
-        String alphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuv";
+    public User newPassword(User currentUser) {
+        final String alphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuv";
 
         List<Character> characterList = alphanumericCharacters.chars()
                 .mapToObj(c -> (char) c)
@@ -23,7 +23,7 @@ public class PasswordManagement {
         return newPassword(currentUser);
     }
 
-    public static User changePassword(User currentUser, String newPassword){
+    public User changePassword(User currentUser, String newPassword){
             if (passwordValidation(newPassword)) {
                 System.out.println("Completed.");
                 return new User(currentUser.email(), newPassword, currentUser.altEmail(), currentUser.mailboxCapacity());
@@ -32,8 +32,8 @@ public class PasswordManagement {
             return new User(currentUser.email(), currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
     }
 
-    public static boolean passwordValidation(String password) {
-        String pattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{10}$";
+    private boolean passwordValidation(String password) {
+        final String pattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{10}$";
         return password.matches(pattern);
     }
 }

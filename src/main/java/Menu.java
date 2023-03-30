@@ -6,7 +6,10 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Menu {
-    public static UserRepository userInterface(UserRepository users) {
+    UserManagement um = new UserManagement();
+    Input input = new Input();
+    PasswordManagement pm = new PasswordManagement();
+    public UserRepository userInterface(UserRepository users) {
         try {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter command.");
@@ -31,11 +34,11 @@ public class Menu {
                         System.out.println("No command list found.");
                     }
                 }
-                case "select user" -> UserRepository.userSelect(users);
+                case "select user" -> UserRepository.userSelect(users, input.inputIndex());
                 case "new user" -> {
                     User newUser = new User("null@null.null", null, null, 0);
-                    newUser = UserManagement.newEmail(newUser, Input.inputUserData());
-                    newUser = PasswordManagement.newPassword(newUser);
+                    newUser = um.newEmail(newUser, input.inputUserData());
+                    newUser = pm.newPassword(newUser);
                     users.setSelectedUser(newUser);
                     System.out.println("Completed.");
                     users.getUserList().add(users.getSelectedUser());
@@ -79,7 +82,7 @@ public class Menu {
                 case "set password" -> {
                     if (users.getSelectedUser() != null) {
                         int index = users.getUserList().indexOf(users.getSelectedUser());
-                        users.setSelectedUser(PasswordManagement.changePassword(users.getSelectedUser(), Input.inputPassword()));
+                        users.setSelectedUser(pm.changePassword(users.getSelectedUser(), input.inputPassword()));
                         users.getUserList().set(index, users.getSelectedUser());
                         break;
                     }
@@ -88,7 +91,7 @@ public class Menu {
                 case "set mailbox capacity" -> {
                     if (users.getSelectedUser() != null) {
                         int index = users.getUserList().indexOf(users.getSelectedUser());
-                        users.setSelectedUser(UserManagement.mailboxCapacity(users.getSelectedUser(), Input.inputMailboxCapacity()));
+                        users.setSelectedUser(um.mailboxCapacity(users.getSelectedUser(), input.inputMailboxCapacity()));
                         users.getUserList().set(index, users.getSelectedUser());
                         break;
                     }
@@ -97,7 +100,7 @@ public class Menu {
                 case "set alternate email" -> {
                     if (users.getSelectedUser() != null) {
                         int index = users.getUserList().indexOf(users.getSelectedUser());
-                        users.setSelectedUser(UserManagement.setAlterEmail(users.getSelectedUser(), Input.inputEmail()));
+                        users.setSelectedUser(um.setAlterEmail(users.getSelectedUser(), input.inputEmail()));
                         users.getUserList().set(index, users.getSelectedUser());
                         break;
                     }
@@ -112,4 +115,5 @@ public class Menu {
             return users;
         }
     }
+
 }
