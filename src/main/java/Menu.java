@@ -31,10 +31,10 @@ public class Menu {
                         System.out.println("No command list found.");
                     }
                 }
-                case "select user" -> UserManagement.userSelect(users);
+                case "select user" -> UserRepository.userSelect(users);
                 case "new user" -> {
                     User newUser = new User("null@null.null", null, null, 0);
-                    newUser = UserManagement.newEmail(newUser);
+                    newUser = UserManagement.newEmail(newUser, Input.inputUserData());
                     newUser = PasswordManagement.newPassword(newUser);
                     users.setSelectedUser(newUser);
                     System.out.println("Completed.");
@@ -79,7 +79,7 @@ public class Menu {
                 case "set password" -> {
                     if (users.getSelectedUser() != null) {
                         int index = users.getUserList().indexOf(users.getSelectedUser());
-                        users.setSelectedUser(PasswordManagement.changePassword(users.getSelectedUser()));
+                        users.setSelectedUser(PasswordManagement.changePassword(users.getSelectedUser(), Input.inputPassword()));
                         users.getUserList().set(index, users.getSelectedUser());
                         break;
                     }
@@ -88,7 +88,7 @@ public class Menu {
                 case "set mailbox capacity" -> {
                     if (users.getSelectedUser() != null) {
                         int index = users.getUserList().indexOf(users.getSelectedUser());
-                        users.setSelectedUser(UserManagement.mailboxCapacity(users.getSelectedUser()));
+                        users.setSelectedUser(UserManagement.mailboxCapacity(users.getSelectedUser(), Input.inputMailboxCapacity()));
                         users.getUserList().set(index, users.getSelectedUser());
                         break;
                     }
@@ -97,7 +97,7 @@ public class Menu {
                 case "set alternate email" -> {
                     if (users.getSelectedUser() != null) {
                         int index = users.getUserList().indexOf(users.getSelectedUser());
-                        users.setSelectedUser(UserManagement.setAlterEmail(users.getSelectedUser()));
+                        users.setSelectedUser(UserManagement.setAlterEmail(users.getSelectedUser(), Input.inputEmail()));
                         users.getUserList().set(index, users.getSelectedUser());
                         break;
                     }

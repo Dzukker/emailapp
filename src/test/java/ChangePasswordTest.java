@@ -16,14 +16,7 @@ public class ChangePasswordTest {
     public void testValidChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        String input = "newPasswo1\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
-        User updatedUser = PasswordManagement.changePassword(currentUser);
+        User updatedUser = PasswordManagement.changePassword(currentUser, "newPasswo1");
 
         assertEquals("newPasswo1", updatedUser.password());
     }
@@ -33,14 +26,7 @@ public class ChangePasswordTest {
     public void testInvalidChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        String input = "newinvalidpassword\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
-        User updatedUser = PasswordManagement.changePassword(currentUser);
+        User updatedUser = PasswordManagement.changePassword(currentUser, "wrongpassword");
 
         assertEquals("oldpassword", updatedUser.password());
     }
@@ -50,14 +36,7 @@ public class ChangePasswordTest {
     public void testNullChangePassword() {
         User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);
 
-        String input = null+"\n";
-        ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
-
-        User updatedUser = PasswordManagement.changePassword(currentUser);
+        User updatedUser = PasswordManagement.changePassword(currentUser, null);
 
         assertEquals("oldpassword", updatedUser.password());
     }

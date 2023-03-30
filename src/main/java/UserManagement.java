@@ -1,59 +1,28 @@
 package main.java;
 
-import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class UserManagement {
 
-    public static User newEmail(User currentUser) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Input first name and last name:");
-        String firstname = scanner.next();
-        String lastname = scanner.next();
-
-        String department;
-        System.out.println("""
-                Input the department name (leave blank if none).
-                List of departments:
-                sales, development, accounting.""");
-        scanner.nextLine();
-        department = scanner.nextLine().toLowerCase();
-
-
+    public static User newEmail(User currentUser, String[] userData) {
         String email;
 
-        if (department.equals("sales") || department.equals("development") || department.equals("accounting")) {
-            email = firstname + "." + lastname + "@" + department + ".company.com";
-        }else {
-            email = firstname + "." + lastname + "@company.com";
+//        userData[0] = firstname, userData[0] = lastname, userData[2] = department
+        if (userData[2].equals("sales") || userData[2].equals("development") || userData[2].equals("accounting")) {
+            email = userData[0] + "." + userData[1] + "@" + userData[2] + ".company.com";
+        } else {
+            email = userData[0] + "." + userData[1] + "@company.com";
         }
         return new User(email, currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
+
     }
 
-    public static User mailboxCapacity(User currentUser){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Input the capacity of the mailbox.");
-        try{
-            int newMailboxCapacity = scanner.nextInt();
-            System.out.println("Completed.");
-            return new User(currentUser.email(), currentUser.password(), currentUser.altEmail(), newMailboxCapacity);
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input.");
-            return currentUser;
-        } catch(NoSuchElementException e){
-            System.out.println("Invalid input.");
-            return currentUser;
-        }
+    public static User mailboxCapacity(User currentUser, int newMailboxCapacity){
+        System.out.println("Completed.");
+        return new User(currentUser.email(), currentUser.password(), currentUser.altEmail(), newMailboxCapacity);
     }
 
-    public static User setAlterEmail(User currentUser){
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter alternate email.");
-            String emailAlt = scanner.next();
+    public static User setAlterEmail(User currentUser, String emailAlt){
 
             if (emailValidation(emailAlt)) {
                 System.out.println("Completed.");
@@ -61,10 +30,6 @@ public class UserManagement {
             }
             System.out.println("Incorrect email.");
             return currentUser;
-        }catch(NoSuchElementException e){
-            System.out.println("Incorrect email.");
-            return currentUser;
-        }
     }
 
     public static boolean emailValidation(String email){
@@ -73,30 +38,5 @@ public class UserManagement {
         if (email == null)
             return false;
         return pat.matcher(email).matches();
-    }
-
-    public static void userSelect(UserRepository users) {
-        Scanner scanner = new Scanner(System.in);
-        if (users.getUserList().isEmpty()) {
-            System.out.println("No users found.");
-        } else {
-            System.out.println("Selected user: " + users.getSelectedUser().email());
-            System.out.println("Select user:");
-            for (int i = 0; i < users.getUserList().size(); i++) {
-                System.out.println((i + 1) + ". " + users.getUserList().get(i).email());
-            }
-            try{
-                int selecteduserIndex = scanner.nextInt();
-                User selecteduser = users.getUserList().get(selecteduserIndex - 1);
-                System.out.println("Selected user: " + selecteduser.email());
-                users.setSelectedUser(selecteduser);
-            }catch(InputMismatchException e){
-                System.out.println("Error, You should enter numbers");
-            }catch(IndexOutOfBoundsException e){
-                System.out.println("Error, You should enter number in bounds of user list");
-            }catch(NoSuchElementException e){
-                System.out.println("Error, You should enter numbers");
-            }
-        }
     }
 }

@@ -2,8 +2,6 @@ package main.java;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class PasswordManagement {
@@ -25,22 +23,13 @@ public class PasswordManagement {
         return newPassword(currentUser);
     }
 
-    public static User changePassword(User currentUser){
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Type new password");
-            String newPassword = scanner.next();
-
+    public static User changePassword(User currentUser, String newPassword){
             if (passwordValidation(newPassword)) {
                 System.out.println("Completed.");
                 return new User(currentUser.email(), newPassword, currentUser.altEmail(), currentUser.mailboxCapacity());
             }
             System.out.println("Password should be 10 letters long and contain at least 1 uppercase letter, 1 lowercase letter and 1 number. ");
             return new User(currentUser.email(), currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
-        }catch(NoSuchElementException e){
-            System.out.println("Password should be 10 letters long and contain at least 1 uppercase letter, 1 lowercase letter and 1 number. ");
-            return new User(currentUser.email(), currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
-        }
     }
 
     public static boolean passwordValidation(String password) {
