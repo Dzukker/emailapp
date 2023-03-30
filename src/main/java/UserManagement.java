@@ -4,14 +4,14 @@ import java.util.regex.Pattern;
 
 public class UserManagement {
 
-    public static User newEmail(User currentUser, String[] userData) {
+    public static User newEmail(User currentUser, String[] userData) { // TODO no static in all places!!!
         String email;
 
 //        userData[0] = firstname, userData[0] = lastname, userData[2] = department
         if (userData[2].equals("sales") || userData[2].equals("development") || userData[2].equals("accounting")) {
-            email = userData[0] + "." + userData[1] + "@" + userData[2] + ".company.com";
+            email = userData[0] + "." + userData[1] + "@" + userData[2] + ".company.com"; // TODO use string builder
         } else {
-            email = userData[0] + "." + userData[1] + "@company.com";
+            email = userData[0] + "." + userData[1] + "@company.com"; // TODO use string builder
         }
         return new User(email, currentUser.password(), currentUser.altEmail(), currentUser.mailboxCapacity());
 
@@ -32,8 +32,8 @@ public class UserManagement {
             return currentUser;
     }
 
-    public static boolean emailValidation(String email){
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$";
+    public static boolean emailValidation(String email){ // TODO privte and non static
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,}$"; // TODO extract to constant filed, private
         Pattern pat = Pattern.compile(emailRegex);
         if (email == null)
             return false;

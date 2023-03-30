@@ -26,7 +26,7 @@ public class UserRepository {
     }
 
     public static void userSelect(UserRepository users) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in); //TODO the same situation as with PasswordManagement, no Scanner here
         if (users.getUserList().isEmpty()) {
             System.out.println("No users found.");
         } else {

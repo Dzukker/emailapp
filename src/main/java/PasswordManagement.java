@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class PasswordManagement {
     public static User newPassword(User currentUser) {
-        String alphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuv";
+        String alphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuv"; // TODO constant in class
 
         List<Character> characterList = alphanumericCharacters.chars()
                 .mapToObj(c -> (char) c)
@@ -33,7 +33,7 @@ public class PasswordManagement {
     }
 
     public static boolean passwordValidation(String password) {
-        String pattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{10}$";
+        String pattern = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{10}$"; //TODO constant in class
         return password.matches(pattern);
     }
 }
