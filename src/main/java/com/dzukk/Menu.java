@@ -1,4 +1,4 @@
-package main.java;
+package com.dzukk;
 
 public class Menu {
     UserManagement um = new UserManagement();

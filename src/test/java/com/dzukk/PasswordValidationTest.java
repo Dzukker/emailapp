@@ -1,10 +1,10 @@
-package test.java;
+package com.dzukk;
 
-import main.java.PasswordManagement;
-import main.java.User;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
 public class PasswordValidationTest {
     PasswordManagement pm = new PasswordManagement();
     User currentUser = new User("test@test.com", "oldpassword", "alt@test.com", 100);

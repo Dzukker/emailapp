@@ -1,4 +1,4 @@
-package main.java;
+package com.dzukk;
 
 import java.util.regex.Pattern;
 

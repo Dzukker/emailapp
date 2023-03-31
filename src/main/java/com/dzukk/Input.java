@@ -1,4 +1,4 @@
-package main.java;
+package com.dzukk;
 
 import java.io.File;
 import java.io.FileNotFoundException;
