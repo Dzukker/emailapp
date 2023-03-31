@@ -6,11 +6,16 @@ import java.util.List;
 public class Main {
 
   public static void main(String[] args) {
-    List<User> userList = new ArrayList<>();
-    UserRepository users = new UserRepository(userList);
-    Menu m = new Menu();
 
-    m.userInterface(users);
+    UserRepository users = new UserRepository();
+    PasswordManagement passMgmt = new PasswordManagement();
+    Input inputMgmt = new Input();
+    UserManager userManager = new UserManager(users, passMgmt);
+
+    UserTuiApi tui = new UserTuiApi(userManager, inputMgmt);
+
+    tui.run();
+
   }
 
 }
