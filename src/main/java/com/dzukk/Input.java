@@ -6,16 +6,15 @@ import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 public class Input {
-    public String inputPassword() {
-        Scanner scanner = new Scanner(System.in);
 
+    Scanner scanner = new Scanner(System.in);
+
+    public String inputPassword() {
         System.out.println("Insert Password:");
         return scanner.next();
     }
 
     public String[] inputUserData(){
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("Input first name and last name:");
         String firstname = scanner.next();
         String lastname = scanner.next();
@@ -30,8 +29,6 @@ public class Input {
     }
 
     public int inputMailboxCapacity(){
-        Scanner scanner = new Scanner(System.in);
-
         try{
             System.out.println("Input mailbox capacity:");
             return scanner.nextInt();
@@ -42,15 +39,11 @@ public class Input {
     }
 
     public String inputEmail(){
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("Enter alternate email.");
         return scanner.next();
     }
 
     public int inputIndex(){
-        Scanner scanner = new Scanner(System.in);
-
         try {
             return scanner.nextInt();
         }catch(NoSuchElementException e){
@@ -60,7 +53,6 @@ public class Input {
     }
 
     public String inputCommand(){
-        Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Enter command.");
             return scanner.nextLine().toLowerCase();
@@ -86,4 +78,10 @@ public class Input {
         }
     }
 
+    public String readString() {
+        return scanner.nextLine();
+    }
+    public int readNumber() {
+        return scanner.nextInt();
+    }
 }

@@ -1,18 +1,20 @@
 package com.dzukk;
 
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Map;
 
 public class UserRepository {
-    private final List<User> userList;
+    private final Map<String, User> userStorage;
     private User selectedUser;
 
-    public UserRepository(List<User> userList){
-        this.userList = userList;
+    public UserRepository(){
+        this.userStorage = new HashMap<>();
     }
 
     public List<User> getUserList(){
-        return this.userList;
+        return userStorage.values().stream().toList();
     }
 
     public User getSelectedUser() {
@@ -23,7 +25,7 @@ public class UserRepository {
         this.selectedUser = selectedUser;
     }
     
-    public void PrintUserList(UserRepository users) {
+    public void printUserList(UserRepository users) {
         if (users.getUserList().isEmpty()) {
             System.out.println("No users found.");
         } else {
@@ -44,5 +46,9 @@ public class UserRepository {
         }catch(IndexOutOfBoundsException e){
             System.out.println("Error, You should enter number in bounds of user list");
         }
+    }
+
+    public void addUser(User user) {
+        userStorage.put(user.email(), user);
     }
 }

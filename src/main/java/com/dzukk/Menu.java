@@ -15,7 +15,7 @@ public class Menu {
                 case "commands" ->
                         input.commandList();
                 case "select user" ->{
-                    users.PrintUserList(users);
+                    users.printUserList(users);
                     users.userSelect(users, input.inputIndex());
                 }
                 case "new user" ->
