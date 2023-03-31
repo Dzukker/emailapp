@@ -11,7 +11,7 @@ public class PasswordValidationTest {
     @DisplayName("Inserted valid password")
     @Test
     public void testInvalidPassword() {
-        User updatedUser = pm.changePassword(currentUser, "wrongpassword");
+        User updatedUser = pm.setPassword(currentUser, "wrongpassword");
 
         assertEquals("oldpassword", updatedUser.password());
     }
@@ -19,7 +19,7 @@ public class PasswordValidationTest {
     @DisplayName("Inserted too short password")
     @Test
     public void testShortPassword() {
-        User updatedUser = pm.changePassword(currentUser, "short");
+        User updatedUser = pm.setPassword(currentUser, "short");
 
         assertEquals("oldpassword", updatedUser.password());
     }
@@ -27,7 +27,7 @@ public class PasswordValidationTest {
     @DisplayName("Inserted password with no uppercases")
     @Test
     public void testNoUppercasePassword() {
-        User updatedUser = pm.changePassword(currentUser, "noupperca1");
+        User updatedUser = pm.setPassword(currentUser, "noupperca1");
 
         assertEquals("oldpassword", updatedUser.password());
     }
@@ -35,7 +35,7 @@ public class PasswordValidationTest {
     @DisplayName("Inserted password with no lowercases")
     @Test
     public void testNoLowercasePassword() {
-        User updatedUser = pm.changePassword(currentUser, "NOLOWERCA1");
+        User updatedUser = pm.setPassword(currentUser, "NOLOWERCA1");
 
         assertEquals("oldpassword", updatedUser.password());
     }
@@ -43,7 +43,7 @@ public class PasswordValidationTest {
     @DisplayName("Inserted password with no digits")
     @Test
     public void testNoDigitPassword() {
-        User updatedUser = pm.changePassword(currentUser, "NoDigitpas");
+        User updatedUser = pm.setPassword(currentUser, "NoDigitpas");
 
         assertEquals("oldpassword", updatedUser.password());
     }

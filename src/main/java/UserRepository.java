@@ -2,7 +2,6 @@ package main.java;
 
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class UserRepository {
     private final List<User> userList;
@@ -23,9 +22,8 @@ public class UserRepository {
     public void setSelectedUser(User selectedUser) {
         this.selectedUser = selectedUser;
     }
-
-
-    public static void userSelect(UserRepository users,int selectedUserIndex) {
+    
+    public void PrintUserList(UserRepository users) {
         if (users.getUserList().isEmpty()) {
             System.out.println("No users found.");
         } else {
@@ -34,15 +32,17 @@ public class UserRepository {
             for (int i = 0; i < users.getUserList().size(); i++) {
                 System.out.println((i + 1) + ". " + users.getUserList().get(i).email());
             }
-            try{
-                User selecteduser = users.getUserList().get(selectedUserIndex - 1);
-                System.out.println("Selected user: " + selecteduser.email());
-                users.setSelectedUser(selecteduser);
-            }catch(InputMismatchException e){
-                System.out.println("Error, You should enter numbers");
-            }catch(IndexOutOfBoundsException e){
-                System.out.println("Error, You should enter number in bounds of user list");
-            }
+        }
+    }
+    public void userSelect(UserRepository users,int selectedUserIndex) {
+        try{
+            User selectedUser = users.getUserList().get(selectedUserIndex - 1);
+            System.out.println("Selected user: " + selectedUser.email());
+            users.setSelectedUser(selectedUser);
+        }catch(InputMismatchException e){
+            System.out.println("Error, You should enter numbers");
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Error, You should enter number in bounds of user list");
         }
     }
 }

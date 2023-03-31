@@ -1,5 +1,7 @@
 package main.java;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -40,8 +42,8 @@ public class Input {
     }
 
     public String inputEmail(){
-
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter alternate email.");
         return scanner.next();
     }
@@ -57,5 +59,31 @@ public class Input {
         }
     }
 
+    public String inputCommand(){
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Enter command.");
+            return scanner.nextLine().toLowerCase();
+        }catch(NoSuchElementException e){
+            System.out.println("Exiting the program.");
+            System.exit(0);
+            return null;
+    }
+    }
+
+    public void commandList(){
+        File file = new File("commands.txt");
+        try {
+            Scanner readfile = new Scanner(file);
+
+            while (readfile.hasNextLine()) {
+                String line = readfile.nextLine();
+                System.out.println(line);
+            }
+            readfile.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("No command list found.");
+        }
+    }
 
 }

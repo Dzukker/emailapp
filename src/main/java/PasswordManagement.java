@@ -23,7 +23,7 @@ public class PasswordManagement {
         return newPassword(currentUser);
     }
 
-    public User changePassword(User currentUser, String newPassword){
+    public User setPassword(User currentUser, String newPassword){
             if (passwordValidation(newPassword)) {
                 System.out.println("Completed.");
                 return new User(currentUser.email(), newPassword, currentUser.altEmail(), currentUser.mailboxCapacity());
