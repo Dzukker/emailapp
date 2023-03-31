@@ -1,10 +1,9 @@
-package test.java;
+package com.dzukk;
 
-import main.java.PasswordManagement;
-import main.java.User;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 public class NewPasswordTest {
     PasswordManagement pm = new PasswordManagement();
     @DisplayName("newPassword() matches validation")
