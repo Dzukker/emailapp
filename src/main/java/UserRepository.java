@@ -22,7 +22,7 @@ public class UserRepository {
     public void setSelectedUser(User selectedUser) {
         this.selectedUser = selectedUser;
     }
-
+    
     public void PrintUserList(UserRepository users) {
         if (users.getUserList().isEmpty()) {
             System.out.println("No users found.");
